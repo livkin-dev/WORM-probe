@@ -1,36 +1,37 @@
-# Принудительно включаем TLS 1.2 для совместимости с GitHub
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-
 $ts = [DateTimeOffset]::Now.ToUnixTimeSeconds()
 $eUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt"
 $rUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt"
 
-# Загрузка эндпоинтов
-try {
-    $rawEndpoints = (Invoke-RestMethod -Uri "$eUrl?v=$ts" -TimeoutSec 10 -UseBasicParsing) -split "`r?`n"
-    $endpoints = @()
-    foreach ($line in $rawEndpoints) {
-        $trimmed = $line.Trim()
-        if ($trimmed -and $trimmed.StartsWith("http")) { $endpoints += $trimmed }
+# Загрузка эндпоинтов через curl.exe (надежно и без сбоев)
+$endpoints = @()
+$rawEndpoints = (curl.exe -s "$eUrl?v=$ts") -split "`r?`n"
+foreach ($line in $rawEndpoints) {
+    $trimmed = $line.Trim()
+    if ($trimmed -and $trimmed.StartsWith("http")) {
+        $endpoints += $trimmed
     }
-} catch { $endpoints = @() }
+}
 
 if ($endpoints.Count -eq 0) {
     $endpoints = @("https://chatgpt.com", "https://api.anthropic.com", "https://play.google.com")
 }
 
-# Загрузка резолверов
-try {
-    $rawResolvers = (Invoke-RestMethod -Uri "$rUrl?v=$ts" -TimeoutSec 10 -UseBasicParsing) -split "`r?`n"
-    $resolvers = @()
-    foreach ($line in $rawResolvers) {
-        $trimmed = $line.Trim()
-        if ($trimmed -and $trimmed.Contains("|")) { $resolvers += $trimmed }
+# Загрузка резолверов через curl.exe
+$resolvers = @()
+$rawResolvers = (curl.exe -s "$rUrl?v=$ts") -split "`r?`n"
+foreach ($line in $rawResolvers) {
+    $trimmed = $line.Trim()
+    if ($trimmed -and $trimmed.Contains("|")) {
+        $resolvers += $trimmed
     }
-} catch { $resolvers = @() }
+}
 
 if ($resolvers.Count -eq 0) {
-    $resolvers = @("System|SYS|", "Cloudflare|DoH|https://cloudflare-dns.com/dns-query", "Yandex_UDP|UDP|77.88.8.8")
+    $resolvers = @(
+        "System|SYS|",
+        "Cloudflare|DoH|https://cloudflare-dns.com/dns-query",
+        "Yandex_UDP|UDP|77.88.8.8"
+    )
 }
 
 try { 
@@ -39,7 +40,9 @@ try {
     $myOrg = $geo.org -replace ',',''
     $myReg = "$($geo.city) $($geo.country)" 
 } catch { 
-    $myIp = "Unknown"; $myOrg = "Unknown ISP"; $myReg = "Unknown Region" 
+    $myIp = "Unknown"
+    $myOrg = "Unknown ISP"
+    $myReg = "Unknown Region" 
 }
 
 $f = "worm_results_$(Get-Date -UFormat %s).csv"
@@ -80,7 +83,6 @@ foreach ($u in $endpoints) {
         $ip = ($out -split ':')[1]
         if ([string]::IsNullOrWhiteSpace($ip)) { $ip = "N/A" }
         
-        # ЛОГИКА ТАЙМАУТОВ И БЛОКИРОВОК
         if ($st -eq "000" -or [string]::IsNullOrWhiteSpace($st)) {
             $st = "ERR"
             $td_sec = ""
