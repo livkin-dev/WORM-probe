@@ -26,7 +26,7 @@
 ### macOS / Linux (Bash)
 
 ```bash
-curl -sL [https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/worm.sh](https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/worm.sh) | bash
+curl -sL https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/worm.sh | bash
 ```
 
 ### Windows (PowerShell)
