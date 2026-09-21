@@ -1,1 +1,79 @@
-echo "IyEvYmluL2Jhc2gKRU5EUE9JTlRTX1VSTD0iaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2xpdmtpbi1kZXYvV09STS1wcm9iZS9tYWluL2VuZHBvaW50cy50eHQiClJFU09MVkVSU19VUkw9Imh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9saXZraW4tZGV2L1dPUk0tcHJvYmUvbWFpbi9yZXNvbHZlcnMudHh0IgpmZXRjaGVkX2VwdHM9JChjdXJsIC1zIC1tIDEwICIkRU5EUE9JTlRTX1VSTCIgfCBncmVwIC1FICJeaHR0cCIgfCB0ciAtZCAnXHInKQpmZXRjaGVkX3Jlc29sdmVycz0kKGN1cmwgLXMgLW0gMTAgIiRSRVNvbFZFUlNfVVJMIiB8IGdyZXAgLUUgIi58LnwuIiB8IHRyIC1kICdccicpCmlmIFsgLW4gIiRmZXRjaGVkX2VwdHMiIF07IHRoZW4gbWFwZmlsZSAtdCBFTkRQT0lOVFMgPDwgIiRmZXRjaGVkX2VwdHMiOyBlbHNlIEVORFBvaU5UUz0oImh0dHBzOi8vY2hhdGdwdC5jb20iICJodHRwczovL2FwaS5hbnRocm9waWMuY29tIiAiaHR0cHM6Ly9wbGF5Lmdvb2dsZS5jb20iKTsgZmkKaWYgWyAtbiAiJGZldGNoZWRfcmVzb2x2ZXJzIiBdOyB0aGVuIG1hcGZpbGUgLXQgUkVTT0xWRVJTIDw8ICIkZmV0Y2hlZF9yZXNvbHZlcnMiOyBlbHNlIFJFU09MVkVSUz0oIlN5c3RlbXxTWVN8IiAiQ2xvdWRmbGFyZXxEb0h8aHR0cHM6Ly9jbG91ZGZsYXJlLWRucy5jb20vZG5zLXF1ZXJ5IiAiWWFuZGV4X1VEUHxVRFB8NzcuODguOC44Iik7IGZpCgoyQ1NWX0ZJTEU9Indvcm1fcmVzdWx0c18kKGRhdGUgKyVzKS5jc3YiCkdFTz0kKGN1cmwgLXMgLW0gNSBodHRwczovL2lwaW5mby5pby9qc29uIDI+L2Rldi9udWxsKQpNWV9JUD0kKGVjaG8gIiRHRU8iIHwgZ3JlcCAtbTEgJyJpcCInIHwgY3V0IC1kJyInIC1mNCkKTVlfT1JHPSQoZWNobyAiJEdFTyIgfCBncmVwIC1tMSAnIm9yZyInIHwgY3V0IC1kJyInIC1mNCB8IHNlZCAncy8sLy9nJykKTVlfQ0lUWT0kKGVjaG8gIiRHRU8iIHwgZ3JlcCAtbTEgJyJjaXR5IicgfCBjdXQgLWQnIicgLWY0KQpNWV9DT1VOVFJZPSQoZWNobyAiJEdFTyIgfCBncmVwIC1tMSAnImNvdW50cnkiJyB8IGN1dCAtZCciJyAtZjQpClsgLXogIiRNWV9JUCIgXSAmJiBNWV9JUD0iVW5rbm93biIgJiYgTVlfT1JHPSJVbmtub3duIElTUCIgJiYgTVlfQ0lUWT0iVW5rbm93biIgJiYgTVlfQ09VTlRSWT0iUmVnaW9uIgpNWV9SRUc9IiR7TVlfQ0lUWX0gJHtNWV9DT1VOVFJZfSIKCmVjaG8gIlwiUkVHSU9OXCI7XCJJU1BcIjtcIkVORFBPSU5UXCI7XCJSRVNPTFZFUlwiO1wiSVBcIjtcIlNUQVRVU1wiO1wiRE5TLCDRgdC10LouXCI7XCLQntC20LjQtNCw0L3QuNC1INC+0YLQstC10YLQsCwg0YHQtdC6LlwiO1wi0J7QsdGJ0LXQtSDQstGA0LXQvNGPLCDRgdC10LouXCI7XCJCTE9DS0VEXCIiID4gIiRDU1ZfRklMRSIKCnByaW50ZiAiXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4iCnByaW50ZiAiIPCTh6EgV09STSBQUk9CRTogTExNIEFQSSBDRU5TT1JTSElQICYgRE5TIFRFU1RcbiIKcHJpbnRmICIg8J+M0yBSZWdpb246ICVzIHwgSVNQOiAlcyB8IElQOiAlc1xuIiAiJE1ZX1JFRyIgIiRNWV9PUkciICIkTVlfSVAiCnByaW50ZiAiPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuIgpwcmludGYgIiUtMjhzIHwgJS0xMnMgfCAlLTE1cyB8ICUtNHMgfCAlLTIxcyB8ICVzXG4iICJBUEkgRU5EUE9JTlQiICJSRVNPTFZFUiIgIklQIiAiU1RBVCIgIkROUyAvIFJTUCAvIFRPVCAoc2VjKSIgIkJMT0NLRUQ/IgpwcmludGYgLS0gIi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4iCgpmb3IgdSBpbiAiJHtFTkRQT0lOVFNbQF19IjsgZG8KICBkPSQoZWNobyAiJHUiIHwgYXdrIC1GLyAne3ByaW50ICQzfScpCiAgZm9yIHIgaW4gIiR7UkVTT0xWRVJTW0BdfSI7IGRvCiAgICBybj0kKGVjaG8gIiRyIiB8IGN1dCAtZCd8JyAtZjEpOyBydD0kKGVjaG8gIiRyIiB8IGN1dCAtZCd8JyAtZjIpOyByYT0kKGVjaG8gIiRyIiB8IGN1dCAtZCd8JyAtZjMpCiAgICBpZiBbICIkcnQiIC0gIlNZUyIgXTsgdGhlbiByZXM9JChjdXJsIC1zIC1vIC9kZXYvbnVsbCAtdyAiJXtodHRwX2NvZGV9OiV7cmVtb3RlX2lwfTolIHt0aW1lX25hbWVsb29rdXB9OiV7dGltZV9zdGFydHRyYW5zZmVyfTolIHt0aW1lX3RvdGFsfSIgLW0gMTAgIiR1IikKICAgIGVsaWYgWyAiJHJ0IiAtICJEb0giIF07IHRoZW4gcmVzPSQoY3VybCAtcyAtLWRvaC11cmwgIiRyYSIgLW8gL2Rldi9udWxsIC13ICIlIHtodHRwX2NvZGV9OiV7cmVtb3RlX2lwfTolIHt0aW1lX25hbWVsb29rdXB9OiV7dGltZV9zdGFydHRyYW5zZmVyfTolIHt0aW1lX3RvdGFsfSIgLW0gMTAgIiR1IikKICAgIGVsaWYgWyAiJHJ0IiAtICJVRFAiIF07IHRoZW4gZGlwPSQoZGlnIEAiJHJhIiArc2hvcnQgIiRkIiBBIDI+L2Rldi9udWxsIHwgZ3JlcCAtbTEgLUUgJ15bMC05XXsxLDN9KFwuWzAtOV17MSwzfSksezN9JCcpOyBpZiBbIC1uICIkZGlwIiBdOyB0aGVuIHJlcz0kKGN1cmwgLXMgLS1yZXNvbHZlICIkZDo0NDM6JGRpcCIgLW8gL2Rldi9udWxsIC13ICIlIHtodHRwX2NvZGV9OiV7cmVtb3RlX2lwfTolIHt0aW1lX25hbWVsb29rdXB9OiV7dGltZV9zdGFydHRyYW5zZmVyfTolIHt0aW1lX3RvdGFsfSIgLW0gMTAgIiR1Iik7IGVsc2UgcmVzPSIwMDA6OjA6MDowIjsgZmk7IGZpCiAgICAKICAgIHN0PSQoZWNobyAiJHJlcyIgfCBjdXQgLWQ6IC1mMSk7IGlwPSQoZWNobyAiJHJlcyIgfCBjdXQgLWQ6IC1mMikKICAgIHRkPSQoZWNobyAiJHJlcyIgfCBjdXQgLWQ6IC1mMyB8IHRyICcsJyAnLicpOyB0cj0kKGVjaG8gIiRyZXMiIHwgY3V0IC1kOiAtZjQgfCB0ciAnLCcgJy4nKTsgdHQ9JChlY2hvICIkcmVzIiB8IGN1dCAtZDogLWY1IHwgdHIgJywnICcuJykKICAgIFsgLXogIiRpcCIgXSAmJiBpcD0iTi9BIgogICAgCiAgICBpZiBbIC1uICIkdHQiIF0gJiYgWyAiJHR0IiAhPSAiMCIgXSAgJiYgWyAiJHR0IiAhPSAiMC4wMDAiIF07IHRoZW4gCiAgICAgICAgdGRfc2VjPSQoYXdrIC12IHQ9IiR0ZCIgJ0JFR0lOIHtwcmludGYgIiUuNmYiLCB0fScpCiAgICAgICAgdHJfc2VjPSQoYXdrIC12IHQ9IiR0ciIgJ0JFR0lOIHtwcmludGYgIiUuNmYiLCB0fScpCiAgICAgICAgdHRfc2VjPSQoYXdrIC12IHQ9IiR0dCIgJ0JFR0lOIHtwcmludGYgIiUuNmYiLCB0fScpCiAgICAgICAgdG1fZGlzcD0iJHt0ZF9zZWN9IC8gJHt0cl9zZWN9IC8gJHt0dF9zZWN9IgogICAgZWxzZSAKICAgICAgICB0ZF9zZWM9IiIKICAgICAgICB0cl9zZWM9IiIKICAgICAgICB0dF9zZWM9IiIKICAgICAgICB0bV9kaXNwPSJOL0EiCiAgICBmaQogICAgCiAgICBpZiBbICIkc3QiID0gIjAwMCIgXSB8fCBbIC16ICIkc3QiIF07IHRoZW4gCiAgICAgICAgYj0iWUVTIgogICAgICAgIHByaW50ZiAiJS0yOHMgfCAlLTEycyB8ICUtMTVzIHwgJS00cyB8ICUtMjFzIHwg4pqg77iPIFlFU1xuIiAiJGQiICIkcm4iICIkaXAiICJFUlIiICIkdG1fZGlzcCIKICAgIGVsc2UgCiAgICAgICAgYj0iTk8iCiAgICAgICAgcHJpbnRmICIlLTI4cyB8ICUtMTJzIHwgJS0xNXMgfCAlLTRzIHwgJS0yMXMgfCDimqUgTk9cbiIgIiRkIiAiJHJuIiAiJGlwIiAiJHN0IiAiJHRtX2Rpc3AiCiAgICBmaQogICAgCiAgICBlY2hvICJcIiR7TVlfUkVHfVwiO1wiJHtNWV9PUkd9XCI7XCIke2R9XCI7XCIke3JufVwiO1wiJHtpcH1cIjtcIiR7c3R9XCI7XCIke3RkX3NlY31cIjtcIiR7dHJfc2VjfVwiO1wiJHR0X3NlY1wiO1wiJHtifVwiIiA+PiAiJENTVl9GSUxFIgogIGRvbmUKICBwcmludGYgLS0gIi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4iCmRvbmUKCmN1cmwgLXMgLS1kYXRhLXVybGVuY29kICJlbnRyeS4xMDgxMjc0OTU2QCR7Q1NWX0ZJTEV9IiAiaHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vZm9ybXMvZC9lLzFGQUlwUUxTY2JzOEZEcTFrM0dRQUFqSk1fTjJJSGdYQnZUaktSUGNkX0FtZHZTNUt6Mk5KUWZRL2Zvcm1SZXNwb25zZSIgPiAvZGV2L251bGwKcHJpbnRmICLiqKUgQ1NWINGB0L7RhdGA0LDQvdC100TogJXMrJXNcbuKopSDQlNCw0L3QvdGL0LUg0YPRgdC/0LXRiNC90L4g0L7RgtC/0YDQsNCy0LvQtdC90Ysg0LIgR29vZ2xlIEZvcm1zLlxuIiAiJChwd2QpIiAiJENTVl9GSUxFIgo=" | base64 -d > worm.sh
+#!/bin/bash
+ENDPOINTS_URL="https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt"
+RESOLVERS_URL="https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt"
+
+# Загрузка эндпоинтов (совместимо с Bash 3.2 на macOS)
+ENDPOINTS=()
+for u in $(curl -s -m 10 "$ENDPOINTS_URL" | grep -E "^http" | tr -d '\r'); do
+    [[ -n "$u" ]] && ENDPOINTS+=("$u")
+done
+if [ ${#ENDPOINTS[@]} -eq 0 ]; then
+    ENDPOINTS=("https://chatgpt.com" "https://api.anthropic.com" "https://play.google.com")
+fi
+
+# Загрузка резолверов (совместимо с Bash 3.2 на macOS)
+RESOLVERS=()
+while IFS= read -r r; do
+    [[ -n "$r" ]] && RESOLVERS+=("$r")
+done < <(curl -s -m 10 "$RESOLVERS_URL" | grep -E "|" | tr -d '\r')
+if [ ${#RESOLVERS[@]} -eq 0 ]; then
+    RESOLVERS=("System|SYS|" "Cloudflare|DoH|https://cloudflare-dns.com/dns-query" "Yandex_UDP|UDP|77.88.8.8")
+fi
+
+CSV_FILE="worm_results_$(date +%s).csv"
+GEO=$(curl -s -m 5 https://ipinfo.io/json 2>/dev/null)
+MY_IP=$(echo "$GEO" | grep -m1 '"ip"' | cut -d'"' -f4)
+MY_ORG=$(echo "$GEO" | grep -m1 '"org"' | cut -d'"' -f4 | sed 's/,//g')
+MY_CITY=$(echo "$GEO" | grep -m1 '"city"' | cut -d'"' -f4)
+MY_COUNTRY=$(echo "$GEO" | grep -m1 '"country"' | cut -d'"' -f4)
+[ -z "$MY_IP" ] && MY_IP="Unknown" && MY_ORG="Unknown ISP" && MY_CITY="Unknown" && MY_COUNTRY="Region"
+MY_REG="${MY_CITY} ${MY_COUNTRY}"
+
+echo '"REGION";"ISP";"ENDPOINT";"RESOLVER";"IP";"STATUS";"DNS, сек.";"Ожидание ответа, сек.";"Общее время, сек.";"BLOCKED"' > "$CSV_FILE"
+
+printf "\n====================================================================================================\n"
+printf " 📡 WORM PROBE: LLM API CENSORSHIP & DNS TEST\n"
+printf " 🌍 Region: %s | ISP: %s | IP: %s\n" "$MY_REG" "$MY_ORG" "$MY_IP"
+printf "====================================================================================================\n"
+printf "%-28s | %-12s | %-15s | %-4s | %-21s | %s\n" "API ENDPOINT" "RESOLVER" "IP" "STAT" "DNS / RSP / TOT (sec)" "BLOCKED?"
+printf -- "----------------------------------------------------------------------------------------------------\n"
+
+for u in "${ENDPOINTS[@]}"; do
+  d=$(echo "$u" | awk -F/ '{print $3}')
+  for r in "${RESOLVERS[@]}"; do
+    rn=$(echo "$r" | cut -d'|' -f1); rt=$(echo "$r" | cut -d'|' -f2); ra=$(echo "$r" | cut -d'|' -f3)
+    if [ "$rt" = "SYS" ]; then res=$(curl -s -o /dev/null -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 "$u")
+    elif [ "$rt" = "DoH" ]; then res=$(curl -s --doh-url "$ra" -o /dev/null -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 "$u")
+    elif [ "$rt" = "UDP" ]; then dip=$(dig @"$ra" +short "$d" A 2>/dev/null | grep -m1 -E '^[0-9]{1,3}(\.[0-9]{1,3}){3}$'); if [ -n "$dip" ]; then res=$(curl -s --resolve "$d:443:$dip" -o /dev/null -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 "$u"); else res="000::0:0:0"; fi; fi
+    
+    st=$(echo "$res" | cut -d: -f1); ip=$(echo "$res" | cut -d: -f2)
+    td=$(echo "$res" | cut -d: -f3 | tr ',' '.'); tr=$(echo "$res" | cut -d: -f4 | tr ',' '.'); tt=$(echo "$res" | cut -d: -f5 | tr ',' '.')
+    [ -z "$ip" ] && ip="N/A"
+    
+    if [ -n "$tt" ] && [ "$tt" != "0" ] && [ "$tt" != "0.000" ]; then 
+        td_sec=$(awk -v t="$td" 'BEGIN {printf "%.6f", t}')
+        tr_sec=$(awk -v t="$tr" 'BEGIN {printf "%.6f", t}')
+        tt_sec=$(awk -v t="$tt" 'BEGIN {printf "%.6f", t}')
+        tm_disp="${td_sec} / ${tr_sec} / ${tt_sec}"
+    else 
+        td_sec=""
+        tr_sec=""
+        tt_sec=""
+        tm_disp="N/A"
+    fi
+    
+    if [ "$st" = "000" ] || [ -z "$st" ]; then 
+        b="YES"
+        printf "%-28s | %-12s | %-15s | %-4s | %-21s | ⚠️ YES\n" "$d" "$rn" "$ip" "ERR" "$tm_disp"
+    else 
+        b="NO"
+        printf "%-28s | %-12s | %-15s | %-4s | %-21s | ✅ NO\n" "$d" "$rn" "$ip" "$st" "$tm_disp"
+    fi
+    
+    echo "\"$MY_REG\";\"$MY_ORG\";\"$d\";\"$rn\";\"$ip\";\"$st\";\"$td_sec\";\"$tr_sec\";\"$tt_sec\";\"$b\"" >> "$CSV_FILE"
+  done
+  printf -- "----------------------------------------------------------------------------------------------------\n"
+done
+
+curl -s --data-urlencode "entry.1081274956@${CSV_FILE}" "https://docs.google.com/forms/d/e/1FAIpQLScbs8FDq1k3GQAAjJM_N2IHgXBvTjKRPcd_AmdvS5Kz2NJQfQ/formResponse" > /dev/null
+printf "✅ CSV сохранен: %s/%s\n✅ Данные успешно отправлены в Google Forms.\n" "$(pwd)" "$CSV_FILE"
