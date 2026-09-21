@@ -1,7 +1,7 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $ts = [DateTimeOffset]::Now.ToUnixTimeSeconds()
-$eUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt"
-$rUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt"
+$eUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt".Trim()
+$rUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt".Trim()
 
 # Загрузка эндпоинтов
 $endpoints = @()
