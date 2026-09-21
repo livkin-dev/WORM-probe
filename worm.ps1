@@ -4,11 +4,11 @@ $eUrl = 'https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.
 $rUrl = 'https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt'
 $ts = [DateTimeOffset]::Now.ToUnixTimeSeconds()
 
-# Надёжная очистка URL для совместимости с PowerShell 5.1
-$zwsp  = [char]0x200B
-$zwnj  = [char]0x200C
-$zwj   = [char]0x200D
-$bom   = [char]0xFEFF
+# Корректное приведение к строкам для .Replace() в PowerShell 5.1
+$zwsp  = [string][char]0x200B
+$zwnj  = [string][char]0x200C
+$zwj   = [string][char]0x200D
+$bom   = [string][char]0xFEFF
 
 $eBase = $eUrl.Replace("`r","").Replace("`n","").Replace("`t","").Replace($zwsp,"").Replace($zwnj,"").Replace($zwj,"").Replace($bom,"").Trim()
 $rBase =$rUrl.Replace("`r","").Replace("`n","").Replace("`t","").Replace($zwsp,"").Replace($zwnj,"").Replace($zwj,"").Replace($bom,"").Trim()
