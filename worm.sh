@@ -1,21 +1,31 @@
 #!/bin/bash
-ENDPOINTS_URL="https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt"
-RESOLVERS_URL="https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt"
+# Добавляем ?v=... чтобы обходить 5-минутный кэш GitHub CDN
+TS=$(date +%s)
+ENDPOINTS_URL="https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt?v=$TS"
+resolvers_url="https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt?v=$TS"
 
-# Загрузка эндпоинтов (совместимо с Bash 3.2 на macOS)
+# Загрузка эндпоинтов
 ENDPOINTS=()
-for u in $(curl -s -m 10 "$ENDPOINTS_URL" | grep -E "^http" | tr -d '\r'); do
-    [[ -n "$u" ]] && ENDPOINTS+=("$u")
+IFS=$'\n'
+for line in $(curl -s -m 10 "$ENDPOINTS_URL" | tr -d '\r'); do
+    line=$(echo "$line" | xargs)
+    [[ -n "$line" && "$line" =~ ^http ]] && ENDPOINTS+=("$line")
 done
+unset IFS
+
 if [ ${#ENDPOINTS[@]} -eq 0 ]; then
     ENDPOINTS=("https://chatgpt.com" "https://api.anthropic.com" "https://play.google.com")
 fi
 
-# Загрузка резолверов (совместимо с Bash 3.2 на macOS)
+# Загрузка резолверов
 RESOLVERS=()
-while IFS= read -r r; do
-    [[ -n "$r" ]] && RESOLVERS+=("$r")
-done < <(curl -s -m 10 "$RESOLVERS_URL" | grep -E "|" | tr -d '\r')
+IFS=$'\n'
+for line in $(curl -s -m 10 "$resolvers_url" | tr -d '\r'); do
+    line=$(echo "$line" | xargs)
+    [[ -n "$line" && "$line" == *\|* ]] && RESOLVERS+=("$line")
+done
+unset IFS
+
 if [ ${#RESOLVERS[@]} -eq 0 ]; then
     RESOLVERS=("System|SYS|" "Cloudflare|DoH|https://cloudflare-dns.com/dns-query" "Yandex_UDP|UDP|77.88.8.8")
 fi
