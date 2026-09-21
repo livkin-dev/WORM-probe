@@ -1,16 +1,32 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+$eUrl = 'https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt'
+$rUrl = 'https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt'
 $ts = [DateTimeOffset]::Now.ToUnixTimeSeconds()
-$eUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt".Trim()
-$rUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt".Trim()
+
+# Надёжная очистка URL для совместимости с PowerShell 5.1
+$zwsp  = [char]0x200B
+$zwnj  = [char]0x200C
+$zwj   = [char]0x200D
+$bom   = [char]0xFEFF
+
+$eBase = $eUrl.Replace("`r","").Replace("`n","").Replace("`t","").Replace($zwsp,"").Replace($zwnj,"").Replace($zwj,"").Replace($bom,"").Trim()
+$rBase =$rUrl.Replace("`r","").Replace("`n","").Replace("`t","").Replace($zwsp,"").Replace($zwnj,"").Replace($zwj,"").Replace($bom,"").Trim()
+
+$eReq = '{0}?v={1}' -f $eBase, $ts
+$rReq = '{0}?v={1}' -f $rBase, $ts
 
 # Загрузка эндпоинтов
 $endpoints = @()
 try {
-    $rawE = Invoke-RestMethod -Uri "$eUrl?v=$ts" -UseBasicParsing
+    $rawE = (Invoke-WebRequest -Uri $eReq -UseBasicParsing).Content
     foreach ($line in ($rawE -split "`r?`n")) {
         $trimmed = $line.Trim()
         if ($trimmed -and $trimmed.StartsWith("http")) {
-            $endpoints += $trimmed
+            try {
+                $null = [uri]::new($trimmed)
+                $endpoints += $trimmed
+            } catch {}
         }
     }
 } catch {
@@ -18,14 +34,14 @@ try {
 }
 
 if ($endpoints.Count -eq 0) {
-    Write-Host "[-] Critical: Failed to load endpoints.txt from repository." -ForegroundColor Red
+    Write-Host "[-] Critical: Failed to load valid endpoints from repository." -ForegroundColor Red
     return
 }
 
 # Загрузка резолверов
 $resolvers = @()
 try {
-    $rawR = Invoke-RestMethod -Uri "$rUrl?v=$ts" -UseBasicParsing
+    $rawR = (Invoke-WebRequest -Uri $rReq -UseBasicParsing).Content
     foreach ($line in ($rawR -split "`r?`n")) {
         $trimmed = $line.Trim()
         if ($trimmed -and $trimmed.Contains("|")) {
@@ -37,7 +53,7 @@ try {
 }
 
 if ($resolvers.Count -eq 0) {
-    Write-Host "[-] Critical: Failed to load resolvers.txt from repository." -ForegroundColor Red
+    Write-Host "[-] Critical: Failed to load resolvers from repository." -ForegroundColor Red
     return
 }
 
@@ -64,30 +80,46 @@ Write-Host "====================================================================
 Write-Host "----------------------------------------------------------------------------------------------------"
 
 foreach ($u in $endpoints) { 
-    $d = ([uri]$u).Host
+    try {
+        $d = ([uri]$u).Host
+    } catch {
+        continue
+    }
+
     foreach ($res in $resolvers) { 
-        $p = $res.Split('|')
-        $rn = $p[0]; $rt = $p[1]; $ra = $p[2]
+        $p = $res -split '\|', 3
+        if ($p.Count -lt 3) { continue }
+
+        $rn = $p[0]
+        $rt = $p[1]
+        $ra = $p[2]
         
         if ($rt -eq "SYS") { 
-            $out = curl.exe -s -o NUL -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 $u 
+            $out = curl.exe -s -o NUL -w "%{http_code}|%{remote_ip}|%{time_namelookup}|%{time_starttransfer}|%{time_total}" -m 10 $u 
         } elseif ($rt -eq "DoH") { 
-            $out = curl.exe -s --doh-url $ra -o NUL -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 $u 
+            $out = curl.exe -s --doh-url $ra -o NUL -w "%{http_code}|%{remote_ip}|%{time_namelookup}|%{time_starttransfer}|%{time_total}" -m 10 $u 
         } elseif ($rt -eq "UDP") { 
             try { 
                 $dip = (Resolve-DnsName -Name $d -Server $ra -Type A -ErrorAction Stop | Where-Object {$_.Type -eq 'A'} | Select-Object -First 1).IPAddress
                 if ($dip) { 
-                    $out = curl.exe -s --resolve "$($d):443:$dip" -o NUL -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 $u 
+                    $out = curl.exe -s --resolve "$($d):443:$dip" -o NUL -w "%{http_code}|%{remote_ip}|%{time_namelookup}|%{time_starttransfer}|%{time_total}" -m 10 $u 
                 } else { 
-                    $out = curl.exe -s -o NUL -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 $u 
+                    $out = curl.exe -s -o NUL -w "%{http_code}|%{remote_ip}|%{time_namelookup}|%{time_starttransfer}|%{time_total}" -m 10 $u 
                 } 
             } catch { 
-                $out = "000::0:0:0" 
+                $out = "000||0|0|0" 
             } 
+        } else {
+            continue
         }
         
-        $st = ($out -split ':')[0]
-        $ip = ($out -split ':')[1]
+        $parts = $out -split '\|', 5
+        $st = if ($parts.Count -gt 0) { $parts[0] } else { "000" }
+        $ip = if ($parts.Count -gt 1) { $parts[1] } else { "N/A" }
+        $td = if ($parts.Count -gt 2) { $parts[2] -replace ',', '.' } else { "0" }
+        $tr = if ($parts.Count -gt 3) { $parts[3] -replace ',', '.' } else { "0" }
+        $tt = if ($parts.Count -gt 4) { $parts[4] -replace ',', '.' } else { "0" }
+        
         if ([string]::IsNullOrWhiteSpace($ip)) { $ip = "N/A" }
         
         if ($st -eq "000" -or [string]::IsNullOrWhiteSpace($st)) {
@@ -99,10 +131,6 @@ foreach ($u in $endpoints) {
             $b = "YES"
             [Console]::WriteLine("{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | [!] YES", $d, $rn, $ip, $st, $tm_disp)
         } else {
-            $td = ($out -split ':')[2] -replace ',', '.'
-            $tr = ($out -split ':')[3] -replace ',', '.'
-            $tt = ($out -split ':')[4] -replace ',', '.'
-            
             if (![string]::IsNullOrWhiteSpace($tt) -and $tt -ne "0" -and $tt -ne "0.000") { 
                 $td_sec = ([double]::Parse($td, [System.Globalization.CultureInfo]::InvariantCulture)).ToString("0.000000", [System.Globalization.CultureInfo]::InvariantCulture)
                 $tr_sec = ([double]::Parse($tr, [System.Globalization.CultureInfo]::InvariantCulture)).ToString("0.000000", [System.Globalization.CultureInfo]::InvariantCulture)
