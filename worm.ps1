@@ -2,19 +2,20 @@
 $ts = [DateTimeOffset]::Now.ToUnixTimeSeconds()
 $eUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt"
 $rUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt"
-$wc = New-Object System.Net.WebClient
 
 # Загрузка эндпоинтов
 $endpoints = @()
 try {
-    $textE = $wc.DownloadString("$eUrl?v=$ts")
-    foreach ($line in ($textE -split "`r?`n")) {
+    $rawE = Invoke-RestMethod -Uri "$eUrl?v=$ts" -UseBasicParsing
+    foreach ($line in ($rawE -split "`r?`n")) {
         $trimmed = $line.Trim()
         if ($trimmed -and $trimmed.StartsWith("http")) {
             $endpoints += $trimmed
         }
     }
-} catch {}
+} catch {
+    Write-Host "[-] Error fetching endpoints: $_" -ForegroundColor Yellow
+}
 
 if ($endpoints.Count -eq 0) {
     Write-Host "[-] Critical: Failed to load endpoints.txt from repository." -ForegroundColor Red
@@ -24,14 +25,16 @@ if ($endpoints.Count -eq 0) {
 # Загрузка резолверов
 $resolvers = @()
 try {
-    $textR = $wc.DownloadString("$rUrl?v=$ts")
-    foreach ($line in ($textR -split "`r?`n")) {
+    $rawR = Invoke-RestMethod -Uri "$rUrl?v=$ts" -UseBasicParsing
+    foreach ($line in ($rawR -split "`r?`n")) {
         $trimmed = $line.Trim()
         if ($trimmed -and $trimmed.Contains("|")) {
             $resolvers += $trimmed
         }
     }
-} catch {}
+} catch {
+    Write-Host "[-] Error fetching resolvers: $_" -ForegroundColor Yellow
+}
 
 if ($resolvers.Count -eq 0) {
     Write-Host "[-] Critical: Failed to load resolvers.txt from repository." -ForegroundColor Red
