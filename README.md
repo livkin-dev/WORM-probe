@@ -27,3 +27,6 @@
 ### macOS / Linux (Bash)
 ```bash
 curl -sL [https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/worm.sh](https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/worm.sh) | bash
+
+**### Windows (PowerShell)**
+Invoke-RestMethod -Uri "[https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/worm.ps1](https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/worm.ps1)" | Invoke-Expression
