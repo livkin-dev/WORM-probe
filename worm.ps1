@@ -17,8 +17,8 @@ try {
 } catch {}
 
 if ($endpoints.Count -eq 0) {
-    Write-Error "[-] Critical: Failed to load endpoints.txt from repository."
-    exit 1
+    Write-Host "[-] Critical: Failed to load endpoints.txt from repository." -ForegroundColor Red
+    return
 }
 
 # Загрузка резолверов
@@ -34,8 +34,8 @@ try {
 } catch {}
 
 if ($resolvers.Count -eq 0) {
-    Write-Error "[-] Critical: Failed to load resolvers.txt from repository."
-    exit 1
+    Write-Host "[-] Critical: Failed to load resolvers.txt from repository." -ForegroundColor Red
+    return
 }
 
 try { 
