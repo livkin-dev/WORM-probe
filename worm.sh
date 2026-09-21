@@ -1,8 +1,7 @@
 #!/bin/bash
-# Добавляем ?v=... чтобы обходить 5-минутный кэш GitHub CDN
 TS=$(date +%s)
 ENDPOINTS_URL="https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt?v=$TS"
-resolvers_url="https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt?v=$TS"
+RESOLVERS_URL="https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt?v=$TS"
 
 # Загрузка эндпоинтов
 ENDPOINTS=()
@@ -20,7 +19,7 @@ fi
 # Загрузка резолверов
 RESOLVERS=()
 IFS=$'\n'
-for line in $(curl -s -m 10 "$resolvers_url" | tr -d '\r'); do
+for line in $(curl -s -m 10 "$RESOLVERS_URL" | tr -d '\r'); do
     line=$(echo "$line" | xargs)
     [[ -n "$line" && "$line" == *\|* ]] && RESOLVERS+=("$line")
 done
@@ -57,25 +56,32 @@ for u in "${ENDPOINTS[@]}"; do
     elif [ "$rt" = "UDP" ]; then dip=$(dig @"$ra" +short "$d" A 2>/dev/null | grep -m1 -E '^[0-9]{1,3}(\.[0-9]{1,3}){3}$'); if [ -n "$dip" ]; then res=$(curl -s --resolve "$d:443:$dip" -o /dev/null -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 "$u"); else res="000::0:0:0"; fi; fi
     
     st=$(echo "$res" | cut -d: -f1); ip=$(echo "$res" | cut -d: -f2)
-    td=$(echo "$res" | cut -d: -f3 | tr ',' '.'); tr=$(echo "$res" | cut -d: -f4 | tr ',' '.'); tt=$(echo "$res" | cut -d: -f5 | tr ',' '.')
     [ -z "$ip" ] && ip="N/A"
     
-    if [ -n "$tt" ] && [ "$tt" != "0" ] && [ "$tt" != "0.000" ]; then 
-        td_sec=$(awk -v t="$td" 'BEGIN {printf "%.6f", t}')
-        tr_sec=$(awk -v t="$tr" 'BEGIN {printf "%.6f", t}')
-        tt_sec=$(awk -v t="$tt" 'BEGIN {printf "%.6f", t}')
-        tm_disp="${td_sec} / ${tr_sec} / ${tt_sec}"
-    else 
+    if [ "$st" = "000" ] || [ -z "$st" ]; then 
+        st="ERR"
         td_sec=""
         tr_sec=""
         tt_sec=""
-        tm_disp="N/A"
-    fi
-    
-    if [ "$st" = "000" ] || [ -z "$st" ]; then 
+        tm_disp="TIMEOUT"
         b="YES"
-        printf "%-28s | %-12s | %-15s | %-4s | %-21s | ⚠️ YES\n" "$d" "$rn" "$ip" "ERR" "$tm_disp"
+        printf "%-28s | %-12s | %-15s | %-4s | %-21s | ⚠️ YES\n" "$d" "$rn" "$ip" "$st" "$tm_disp"
     else 
+        td=$(echo "$res" | cut -d: -f3 | tr ',' '.')
+        tr=$(echo "$res" | cut -d: -f4 | tr ',' '.')
+        tt=$(echo "$res" | cut -d: -f5 | tr ',' '.')
+        
+        if [ -n "$tt" ] && [ "$tt" != "0" ] && [ "$tt" != "0.000" ]; then 
+            td_sec=$(awk -v t="$td" 'BEGIN {printf "%.6f", t}')
+            tr_sec=$(awk -v t="$tr" 'BEGIN {printf "%.6f", t}')
+            tt_sec=$(awk -v t="$tt" 'BEGIN {printf "%.6f", t}')
+            tm_disp="${td_sec} / ${tr_sec} / ${tt_sec}"
+        else 
+            td_sec=""
+            tr_sec=""
+            tt_sec=""
+            tm_disp="N/A"
+        fi
         b="NO"
         printf "%-28s | %-12s | %-15s | %-4s | %-21s | ✅ NO\n" "$d" "$rn" "$ip" "$st" "$tm_disp"
     fi
