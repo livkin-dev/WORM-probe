@@ -1,20 +1,19 @@
+# Принудительно включаем TLS 1.2 для совместимости с GitHub
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 $ts = [DateTimeOffset]::Now.ToUnixTimeSeconds()
 $eUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt"
 $rUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt"
 
 # Загрузка эндпоинтов
 try {
-    $rawEndpoints = (Invoke-RestMethod -Uri "$eUrl?v=$ts" -TimeoutSec 10) -split "`r?`n"
+    $rawEndpoints = (Invoke-RestMethod -Uri "$eUrl?v=$ts" -TimeoutSec 10 -UseBasicParsing) -split "`r?`n"
     $endpoints = @()
     foreach ($line in $rawEndpoints) {
         $trimmed = $line.Trim()
-        if ($trimmed -and $trimmed.StartsWith("http")) {
-            $endpoints += $trimmed
-        }
+        if ($trimmed -and $trimmed.StartsWith("http")) { $endpoints += $trimmed }
     }
-} catch {
-    $endpoints = @()
-}
+} catch { $endpoints = @() }
 
 if ($endpoints.Count -eq 0) {
     $endpoints = @("https://chatgpt.com", "https://api.anthropic.com", "https://play.google.com")
@@ -22,35 +21,25 @@ if ($endpoints.Count -eq 0) {
 
 # Загрузка резолверов
 try {
-    $rawResolvers = (Invoke-RestMethod -Uri "$rUrl?v=$ts" -TimeoutSec 10) -split "`r?`n"
+    $rawResolvers = (Invoke-RestMethod -Uri "$rUrl?v=$ts" -TimeoutSec 10 -UseBasicParsing) -split "`r?`n"
     $resolvers = @()
     foreach ($line in $rawResolvers) {
         $trimmed = $line.Trim()
-        if ($trimmed -and $trimmed.Contains("|")) {
-            $resolvers += $trimmed
-        }
+        if ($trimmed -and $trimmed.Contains("|")) { $resolvers += $trimmed }
     }
-} catch {
-    $resolvers = @()
-}
+} catch { $resolvers = @() }
 
 if ($resolvers.Count -eq 0) {
-    $resolvers = @(
-        "System|SYS|",
-        "Cloudflare|DoH|https://cloudflare-dns.com/dns-query",
-        "Yandex_UDP|UDP|77.88.8.8"
-    )
+    $resolvers = @("System|SYS|", "Cloudflare|DoH|https://cloudflare-dns.com/dns-query", "Yandex_UDP|UDP|77.88.8.8")
 }
 
 try { 
-    $geo = Invoke-RestMethod -Uri "https://ipinfo.io/json" -TimeoutSec 5
+    $geo = Invoke-RestMethod -Uri "https://ipinfo.io/json" -TimeoutSec 5 -UseBasicParsing
     $myIp = $geo.ip
     $myOrg = $geo.org -replace ',',''
     $myReg = "$($geo.city) $($geo.country)" 
 } catch { 
-    $myIp = "Unknown"
-    $myOrg = "Unknown ISP"
-    $myReg = "Unknown Region" 
+    $myIp = "Unknown"; $myOrg = "Unknown ISP"; $myReg = "Unknown Region" 
 }
 
 $f = "worm_results_$(Get-Date -UFormat %s).csv"
@@ -89,25 +78,30 @@ foreach ($u in $endpoints) {
         
         $st = ($out -split ':')[0]
         $ip = ($out -split ':')[1]
-        $td = ($out -split ':')[2] -replace ',', '.'
-        $tr = ($out -split ':')[3] -replace ',', '.'
-        $tt = ($out -split ':')[4] -replace ',', '.'
-        
         if ([string]::IsNullOrWhiteSpace($ip)) { $ip = "N/A" }
         
-        if (![string]::IsNullOrWhiteSpace($tt) -and $tt -ne "0" -and $tt -ne "0.000") { 
-            $td_sec = ([double]::Parse($td, [System.Globalization.CultureInfo]::InvariantCulture)).ToString("0.000000", [System.Globalization.CultureInfo]::InvariantCulture)
-            $tr_sec = ([double]::Parse($tr, [System.Globalization.CultureInfo]::InvariantCulture)).ToString("0.000000", [System.Globalization.CultureInfo]::InvariantCulture)
-            $tt_sec = ([double]::Parse($tt, [System.Globalization.CultureInfo]::InvariantCulture)).ToString("0.000000", [System.Globalization.CultureInfo]::InvariantCulture)
-            $tm_disp = "$td_sec / $tr_sec / $tt_sec" 
-        } else { 
-            $td_sec = ""; $tr_sec = ""; $tt_sec = ""; $tm_disp = "N/A" 
-        }
-        
-        if ($st -eq "000" -or [string]::IsNullOrWhiteSpace($st)) { 
+        # ЛОГИКА ТАЙМАУТОВ И БЛОКИРОВОК
+        if ($st -eq "000" -or [string]::IsNullOrWhiteSpace($st)) {
+            $st = "ERR"
+            $td_sec = ""
+            $tr_sec = ""
+            $tt_sec = ""
+            $tm_disp = "TIMEOUT"
             $b = "YES"
-            [Console]::WriteLine("{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | [!] YES", $d, $rn, $ip, "ERR", $tm_disp)
-        } else { 
+            [Console]::WriteLine("{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | [!] YES", $d, $rn, $ip, $st, $tm_disp)
+        } else {
+            $td = ($out -split ':')[2] -replace ',', '.'
+            $tr = ($out -split ':')[3] -replace ',', '.'
+            $tt = ($out -split ':')[4] -replace ',', '.'
+            
+            if (![string]::IsNullOrWhiteSpace($tt) -and $tt -ne "0" -and $tt -ne "0.000") { 
+                $td_sec = ([double]::Parse($td, [System.Globalization.CultureInfo]::InvariantCulture)).ToString("0.000000", [System.Globalization.CultureInfo]::InvariantCulture)
+                $tr_sec = ([double]::Parse($tr, [System.Globalization.CultureInfo]::InvariantCulture)).ToString("0.000000", [System.Globalization.CultureInfo]::InvariantCulture)
+                $tt_sec = ([double]::Parse($tt, [System.Globalization.CultureInfo]::InvariantCulture)).ToString("0.000000", [System.Globalization.CultureInfo]::InvariantCulture)
+                $tm_disp = "$td_sec / $tr_sec / $tt_sec" 
+            } else { 
+                $td_sec = ""; $tr_sec = ""; $tt_sec = ""; $tm_disp = "N/A" 
+            }
             $b = "NO"
             [Console]::WriteLine("{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | [OK] NO", $d, $rn, $ip, $st, $tm_disp)
         }
