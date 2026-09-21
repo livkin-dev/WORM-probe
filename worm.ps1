@@ -1,1 +1,124 @@
-[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JGVVcmw9Imh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9saXZraW4tZGV2L1dPUk0tcHJvYmUvbWFpbi9lbmRwb2ludHMudHh0IjsgJHJVcmw9Imh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9saXZraW4tZGV2L1dPUk0tcHJvYmUvbWFpbi9yZXNvbHZlcnMudHh0IjsgdHJ5eyAkZT0oSW52b2tlLVJlc3RNZXRob2QgLVVyaSAkZVVybCAtVGltZW91dFNlYyAxMCB8IFNlbGVjdC1TdHJpbmcgLVBhdHRlcm4gIl5odHRwIiAtQWxsTWF0Y2hlcykuaW5wdXQgLS1uZTQgJE51bGwgfWNhdGNoeyAkZT1AKCJodHRwczovL2NoYXRncHQuY29tIiwiaHR0cHM6Ly9hcGkuYW50aHJvcGljLmNvbSIsImh0dHBzOi8vcGxheS5nb29nbGUuY29tIikgfTsgdHJ5eyAkcj0oSW52b2tlLVJlc3RNZXRob2QgLVVyaSAkclVybCAtVGltZW91dFNlYyAxMCB8IFNlbGVjdC1TdHJpbmcgLVBhdHRlcm4gIlx8LiR8IiAtQWxsTWF0Y2hlcykuaW5wdXQgLS1uZTQgJE51bGwgfWNhdGNoeyAkcj1AKCJTeXN0ZW18U1lTfCIsIkNsb3VkZmxhcmV8RG9IfGh0dHBzOi8vY2xvdWRmbGFyZS1kbnMuY29tL2Rucy1xdWVyeSIsIllhbmRleF9VRFB8VURQfDc3Ljg4LjguOCIpIH07IHRyeSB7ICRnZW89SW52b2tlLVJlc3RNZXRob2QgLVVyaSAiaHR0cHM6Ly9pcGluZm8uaW8vanNvbiIgLVRpbWVvdXRTZWMgNTsgJG15SXA9JGdlby5pcDsgJG15T3JnPSRnZW8ub3JnIC1yZXBsYWNlICcsJywnJzsgJG15UmVnPSIkKCRnZW8uY2l0eSkgJCgkZ2VvLmNvdW50cnkpIiB9IGNhdGNoIHsgJG15SXA9IlVua25vd24iOyAkbXlPcmc9IlVua25vd24gSVNQIjsgJG15UmVnPSJVbmtub3duIFJlZ2lvbiIgfTsgJGY9Indvcm1fcmVzdWx0c18kKEdldC1EYXRlIC1VRm9ybWF0ICVzKS5jc3YiOyAkY3N2SGVhZGVyPSdgIlJFR0lPTmAiO2AiSVNQYCI7YCJFTkRQT0lOVGAiO2AiUkVTT0xWRVJgIjtgIklQYCI7YCJTVEFUVVNgIjtgIkROUywg0YHQtdC6LmAiO2Ai0J7QttC40LTQsNC90LjQtSDQvtGC0LLQtdGC0LAsINGB0LXQui5gIjtgItCe0LHRidC10LUg0LLRgNC10LzRjywg0YHQtdC6LmAiO2AiQkxPQ0tFRGAiJzsgT3V0LUZpbGUgLUZpbGVQYXRoICIkZiIgLUlucHV0T2JqZWN0ICRjc3ZIZWFkZXIgLUVuY29kaW5nIHV0Zjg7IFdyaXRlLUhvc3QgImBuPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PSI7IFdyaXRlLUhvc3QgIiDwn4ehIFdPUk0gUFJPQkU6IExMTSBBUEkgQ0VOU09SU0hJUCAmIEROUyBURVNUIjsgV3JpdGUtSG9zdCAiIPCfjNMgUmVnaW9uOiAkbXlSZWcgfCBJU1A6ICRteU9yZyB8IElQOiAkbXlJcCI7IFdyaXRlLUhvc3QgIj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0iOyAiezAsLTI4fSB8IHsxLC0xMn0gfCB7MiwtMTV9IHwgezMsLTR9IHwgezQsLTIxfSB8IHs1fSIgLWYgIkFQSSBFTkRQT0lOVCIsIlJFU09MVkVSIiwiSVAiLCJTVEFUIiwiRE5TIC8gUlNQIC8gVE9UIChzZWMpIiwiQkxPQ0tFRD8iOyBXcml0ZS1Ib3N0ICItLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSI7IGZvcmVhY2ggKCR1IGluICRlKSB7ICRkPShbdXJpXSR1KS5Ib3N0OyBmb3JlYWNoICgkcmVzIGluICRyKSB7ICRwPSRyZXMuU3BsaXQoJ3wnKTsgJHJuPSRwWzBdOyAkcnQ9JHBbMV07ICRyYT0kcFsyXTsgICAgICAgIGlmICgscnQgLWVxICJTWVMiKSB7ICRvdXQgPSBjdXJsLmV4ZSAtcyAtbyBOVUwgLXcgIiUoaHR0cF9jb2RlfTolIHtyZW1vdGVfaXB9OiUoe3RpbWVfbmFtZWxvb2t1cH06JSh0aW1lX3N0YXJ0dHJhbnNmZXJ9OiUoe3RpbWVfdG90YWx9IiAtbSAxMCAkdSB9IGVsc2VpZiAoJHJ0IC1lcSAiRG9IIikgeyAkb3V0ID0gY3VybC5leGUgLXMgLS1kb2gtdXJsICRyYSAtbyBOVUwgLXcgIiUoaHR0cF9jb2RlfTolIHtyZW1vdGVfaXB9OiUoe3RpbWVfbmFtZWxvb2t1cH06JSh0aW1lX3N0YXJ0dHJhbnNmZXJ9OiUoe3RpbWVfdG90YWx9IiAtbSAxMCAkdSB9IGVsc2VpZiAoJHJ0IC1lcSAiVURQIikgeyB0cnkgeyAkZGlwID0gKFJlc29sdmUtRG5zTmFtZSAtTmFtZSAkZCAtU2VydmVyICRyYSAtVHlwZSBBIC1FcnJvckFjdGlvbiBTdG9wIHwgV2hlcmUtT2JqZWN0IHskXy5UeXBlIC1lcSAnQSd9IHwgU2VsZWN0LU9iamVjdCAtRmlyc3QgMSkuSVBBZGRyZXNzOyBpZiAoJGRpcCkgeyAkb3V0ID0gY3VybC5leGUgLXMgLS1yZXNvbHZlICIkKCRkKTo0NDM6JGRpcCIgLW8gTlVMIC13ICIlIHtodHRwX2NvZGV9OiUre3JlbW90ZV9pcH06JSh0aW1lX25hbWVsb29rdXB9OiV7dGltZV9zdGFydHRyYW5zZmVyfTolIHt0aW1lX3RvdGFsfSIgLW0gMTAgJHUgfSBlbHNlIHsgJG91dCA9ICIwMDA6OjA6MDowIiB9IH0gY2F0Y2ggeyAkb3V0ID0gIjAwMDo6MDowOjAiIH0gfTsgJHN0PSgkb3V0IC1zcGxpdCAnOicpWzBdOyAkaXA9KCRvdXQgLXNwbGl0ICc6JylbMV07ICR0ZD0oJG91dCAtc3BsaXQgJzonKVsyXSAtcmVwbGFjZSAnLCcsICcuJzsgJHRyPSgkb3V0IC1zcGxpdCAnOicpWzNdIC1yZXBsYWNlICcsJywgJy4nOyAkdHQ9KCRvdXQgLXNwbGl0ICc6JylbNF0gLXJlcGxhY2UgJywnLCAnLic7IGlmKFtzdHJpbmddOjpJc051bGxPcldoaXRlU3BhY2UoJGlwKSl7JGlwPSJOL0EifTsgICAgICAgIGlmICghW3N0cmluZ106OklzTnVsbE9yV2hpdGVTcGFjZSgkdHQpIC1hbmQgJHR0IC1uZSAiMCIgLWFuZCAkdHQgLW5lICIwLjAwMCIpIHsgICAgICAgICAgICAkdGRfc2VjID0gKFtkb3VibGVdOjpQYXJzZSgkdGQsIFtTeXN0ZW0uR2xvYmFsaXphdGlvbi5DdWx0dXJlSW5mb106OkludmFyaWFudEN1bHR1cmUpKS5Ub1N0cmluZygiMC4wMDAwMDAiLCBbU3lzdGVtLkdsb2JhbGl6YXRpb24uQ3VsdHVyZUluZm9dOjpJbnZhcmlhbnRDdWx0dXJlKTsgICAgICAgICAgICAkdHJfc2VjID0gKFtkb3VibGVdOjpQYXJzZSgkdHIsIFtTeXN0ZW0uR2xvYmFsaXphdGlvbi5DdWx0dXJlSW5mb106OkludmFyaWFudEN1bHR1cmUpKS5Ub1N0cmluZygiMC4wMDAwMDAiLCBbU3lzdGVtLkdsb2JhbGl6YXRpb24uQ3VsdHVyZUluZm9dOjpJbnZhcmlhbnRDdWx0dXJlKTsgICAgICAgICAgICAkdHRfc2VjID0gKFtkb3VibGVdOjpQYXJzZSgkdHQsIFtTeXN0ZW0uR2xvYmFsaXphdGlvbi5DdWx0dXJlSW5mb106OkludmFyaWFudEN1bHR1cmUpKS5Ub1N0cmluZygiMC4wMDAwMDAiLCBbU3lzdGVtLkdsb2JhbGl6YXRpb24uQ3VsdHVyZUluZm9dOjpJbnZhcmlhbnRDdWx0dXJlKTsgICAgICAgICAgICAkdG1fZGlzcCA9ICIkdGRfc2VjIC8gJHRyX3NlYyAvICR0dF9zZWMiICAgICAgICB9IGVsc2UgeyAgICAgICAgICAgICR0ZF9zZWMgPSAiIjsgJHRyX3NlYyA9ICIiOyAkdHRfc2VjID0gIiI7ICR0bV9kaXNwID0gIk4vQSIgICAgICAgIH07ICAgICAgICBpZiAoJHN0IC1lcSAiMDAwIiAtb3IgW3N0cmluZ106OklzTnVsbE9yV2hpdGVTcGFjZSgkc3QpKSB7ICAgICAgICAgICAgJGIgPSAiWUVTIjsgICAgICAgICAgICAiezAsLTI4fSB8IHsxLC0xMn0gfCB7MiwtMTV9IHwgezMsLTR9IHwgezQsLTIxfSB8IOKaoO+4jyBZRVMiIC1mICRkLCRybiwkaXAsIkVSUiIsJHRtX2Rpc3AgICAgICAgIH0gZWxzZSB7ICAgICAgICAgICAgJGIgPSAiTk8iOyAgICAgICAgICAgICJ7MCwtMjh9IHwgezEsLTEyfSB8IHsyLC0xNX0gfCB7MywtNH0gfCB7NCwtMjF9IHwgaqUgTk8iIC1mICRkLCRybiwkaXAsJHN0LCR0bV9kaXNwICAgICAgICB9OyAgICAgICAgJHJvdyA9ICJgIiRteVJlZ2AiO2AiJG15T3JnYCI7YCIkZGAiO2AiJHJuYCI7YCIkaXBgIjtgIiRzdGAiO2AiJHRkX3NlY2AiO2AiJHRyX3NlY2AiO2AiJHR0X3NlY2AiO2AiJGJgIiI7ICAgICAgICBPdXQtRmlsZSAtRmlsZVBhdGggIiRmIiAtSW5wdXRPYmplY3QgJHJvdyAtQXBwZW5kIC1FbmNvZGluZyB1dGY4ICAgIH0gOyAgICBXcml0ZS1Ib3N0ICItLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSIgfTsgJHVybCA9ICJodHRwczovL2RvY3MuZ29vZ2xlLmNvbS9mb3Jtcy9kL2UvMUZBSXBRTFNjYnM4RkRxMWszR1FBQWpKTV9OMklIZ1hCdlRqS1JQY2RfQW1kdlM1S3oyTkpRZlEvZm9ybVJlc3BvbnNlIjsgY3VybC5leGUgLXMgLS1kYXRhLXVybGVuY29kICJlbnRyeS4xMDgxMjc0OTU2QCRmIiAkdXJsIC1vIE5VTDsgJGZwID0gKEdldC1JdGVtICIkZiIpLkZ1bGxOYW1lOyBXcml0ZS1Ib3N0ICLiqKUgQ1NWINGB0L7RhdGA0LDQvdC100TogJGZwIjsgV3JpdGUtSG9zdCAi4qilINCU0LDQvdC90YvQtSDRg9GB0L/QtdGI0L3QviDQvtGC0L/RgNCw0LLQu9C10L3RiyDQsiBHb29nbGUgRm9ybXMuIg==")) | Out-File -FilePath "worm.ps1" -Encoding utf8
+$ts = [DateTimeOffset]::Now.ToUnixTimeSeconds()
+$eUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt"
+$rUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt"
+
+# Загрузка эндпоинтов
+try {
+    $rawEndpoints = (Invoke-RestMethod -Uri "$eUrl?v=$ts" -TimeoutSec 10) -split "`r?`n"
+    $endpoints = @()
+    foreach ($line in $rawEndpoints) {
+        $trimmed = $line.Trim()
+        if ($trimmed -and $trimmed.StartsWith("http")) {
+            $endpoints += $trimmed
+        }
+    }
+} catch {
+    $endpoints = @()
+}
+
+if ($endpoints.Count -eq 0) {
+    $endpoints = @("https://chatgpt.com", "https://api.anthropic.com", "https://play.google.com")
+}
+
+# Загрузка резолверов
+try {
+    $rawResolvers = (Invoke-RestMethod -Uri "$rUrl?v=$ts" -TimeoutSec 10) -split "`r?`n"
+    $resolvers = @()
+    foreach ($line in $rawResolvers) {
+        $trimmed = $line.Trim()
+        if ($trimmed -and $trimmed.Contains("|")) {
+            $resolvers += $trimmed
+        }
+    }
+} catch {
+    $resolvers = @()
+}
+
+if ($resolvers.Count -eq 0) {
+    $resolvers = @(
+        "System|SYS|",
+        "Cloudflare|DoH|https://cloudflare-dns.com/dns-query",
+        "Yandex_UDP|UDP|77.88.8.8"
+    )
+}
+
+try { 
+    $geo = Invoke-RestMethod -Uri "https://ipinfo.io/json" -TimeoutSec 5
+    $myIp = $geo.ip
+    $myOrg = $geo.org -replace ',',''
+    $myReg = "$($geo.city) $($geo.country)" 
+} catch { 
+    $myIp = "Unknown"
+    $myOrg = "Unknown ISP"
+    $myReg = "Unknown Region" 
+}
+
+$f = "worm_results_$(Get-Date -UFormat %s).csv"
+$csvHeader = '"REGION";"ISP";"ENDPOINT";"RESOLVER";"IP";"STATUS";"DNS, сек.";"Ожидание ответа, сек.";"Общее время, сек.";"BLOCKED"'
+Out-File -FilePath "$f" -InputObject $csvHeader -Encoding utf8
+
+Write-Host "`n===================================================================================================="
+Write-Host " 📡 WORM PROBE: LLM API CENSORSHIP & DNS TEST"
+Write-Host " 🌍 Region: $myReg | ISP: $myOrg \vert{} IP:$myIp"
+Write-Host "===================================================================================================="
+"{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | {5}" -f "API ENDPOINT","RESOLVER","IP","STAT","DNS / RSP / TOT (sec)","BLOCKED?"
+Write-Host "----------------------------------------------------------------------------------------------------"
+
+foreach ($u in$endpoints) { 
+    $d = ([uri]$u).Host
+    foreach ($res in$resolvers) { 
+        $p =$res.Split('|')
+        $rn =$p[0]; $rt =$p[1]; $ra =$p[2]
+        
+        if ($rt -eq "SYS") { 
+            $out = curl.exe -s -o NUL -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 $u 
+        } elseif ($rt -eq "DoH") { 
+            $out = curl.exe -s --doh-url$ra -o NUL -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 $u 
+        } elseif ($rt -eq "UDP") { 
+            try { 
+                $dip = (Resolve-DnsName -Name$d -Server $ra -Type A -ErrorAction Stop \vert{} Where-Object {$_.Type -eq 'A'} | Select-Object -First 1).IPAddress
+                if ($dip) { 
+                    $out = curl.exe -s --resolve "$($d):443:$dip" -o NUL -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 $u 
+                } else { 
+                    $out = curl.exe -s -o NUL -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 $u 
+                } 
+            } catch { 
+                $out = "000::0:0:0" 
+            } 
+        }
+        
+        $st = ($out -split ':')[0]
+        $ip = ($out -split ':')[1]
+        $td = ($out -split ':')[2] -replace ',', '.'
+        $tr = ($out -split ':')[3] -replace ',', '.'
+        $tt = ($out -split ':')[4] -replace ',', '.'
+        
+        if ([string]::IsNullOrWhiteSpace($ip)) {$ip = "N/A" }
+        
+        if (![string]::IsNullOrWhiteSpace($tt) -and $tt -ne "0" -and $tt -ne "0.000") { 
+            $td_sec = ([double]::Parse($td, [System.Globalization.CultureInfo]::InvariantCulture)).ToString("0.000000", [System.Globalization.CultureInfo]::InvariantCulture)
+            $tr_sec = ([double]::Parse($tr, [System.Globalization.CultureInfo]::InvariantCulture)).ToString("0.000000", [System.Globalization.CultureInfo]::InvariantCulture)
+            $tt_sec = ([double]::Parse($tt, [System.Globalization.CultureInfo]::InvariantCulture)).ToString("0.000000", [System.Globalization.CultureInfo]::InvariantCulture)
+            $tm_disp = "$td_sec / $tr_sec / $tt_sec" 
+        } else { 
+            $td_sec = ""; $tr_sec = ""; $tt_sec = ""; $tm_disp = "N/A" 
+        }
+        
+        if ($st -eq "000" -or [string]::IsNullOrWhiteSpace($st)) {$b = "YES"
+            "{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | ⚠️ YES" -f $d,$rn,$ip,"ERR",$tm_disp 
+        } else { 
+            $b = "NO"
+            "{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | ✅ NO" -f $d,$rn,$ip,$st,$tm_disp 
+        }
+        
+        $row = "`"$myReg`";`"$myOrg`";`"$d`";`"$rn`";`"$ip`";`"$st`";`"$td_sec`";`"$tr_sec`";`"$tt_sec`";`"$b`""
+        Out-File -FilePath "$f" -InputObject $row -Append -Encoding utf8
+    } 
+    Write-Host "----------------------------------------------------------------------------------------------------" 
+}
+
+$url = "https://docs.google.com/forms/d/e/1FAIpQLScbs8FDq1k3GQAAjJM_N2IHgXBvTjKRPcd_AmdvS5Kz2NJQfQ/formResponse"
+curl.exe -s --data-urlencode "entry.1081274956@$f" $url -o NUL
+$fp = (Get-Item "$f").FullName
+Write-Host "✅ CSV сохранен: $fp"
+Write-Host "✅ Данные успешно отправлены в Google Forms."
