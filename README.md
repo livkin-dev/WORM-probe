@@ -32,7 +32,7 @@ curl -sL https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/worm.sh | 
 ### Windows (PowerShell)
 
 ```powershell
-Invoke-RestMethod -Uri "[https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/worm.ps1](https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/worm.ps1)" | Invoke-Expression
+Invoke-RestMethod -Uri "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/worm.ps1" | Invoke-Expression
 ```
 
 ## Формат экспорта данных
