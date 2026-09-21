@@ -1,22 +1,10 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$eUrl = 'https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt'
-$rUrl = 'https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt'
 $ts = [DateTimeOffset]::Now.ToUnixTimeSeconds()
+$eReq = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt?v=$ts"
+$rReq = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt?v=$ts"
 
-# Корректное приведение к строкам для .Replace() в PowerShell 5.1
-$zwsp  = [string][char]0x200B
-$zwnj  = [string][char]0x200C
-$zwj   = [string][char]0x200D
-$bom   = [string][char]0xFEFF
-
-$eBase = $eUrl.Replace("`r","").Replace("`n","").Replace("`t","").Replace($zwsp,"").Replace($zwnj,"").Replace($zwj,"").Replace($bom,"").Trim()
-$rBase =$rUrl.Replace("`r","").Replace("`n","").Replace("`t","").Replace($zwsp,"").Replace($zwnj,"").Replace($zwj,"").Replace($bom,"").Trim()
-
-$eReq = '{0}?v={1}' -f $eBase, $ts
-$rReq = '{0}?v={1}' -f $rBase, $ts
-
-# Загрузка эндпоинтов
+# Загрузка эндпоинтов через Invoke-WebRequest со стабилизацией .Content
 $endpoints = @()
 try {
     $rawE = (Invoke-WebRequest -Uri $eReq -UseBasicParsing).Content
@@ -38,7 +26,7 @@ if ($endpoints.Count -eq 0) {
     return
 }
 
-# Загрузка резолверов
+# Загрузка резолверов через Invoke-WebRequest со стабилизацией .Content
 $resolvers = @()
 try {
     $rawR = (Invoke-WebRequest -Uri $rReq -UseBasicParsing).Content
