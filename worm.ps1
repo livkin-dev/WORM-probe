@@ -1,37 +1,41 @@
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $ts = [DateTimeOffset]::Now.ToUnixTimeSeconds()
 $eUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/endpoints.txt"
 $rUrl = "https://raw.githubusercontent.com/livkin-dev/WORM-probe/main/resolvers.txt"
+$wc = New-Object System.Net.WebClient
 
-# Загрузка эндпоинтов через curl.exe (надежно и без сбоев)
+# Загрузка эндпоинтов
 $endpoints = @()
-$rawEndpoints = (curl.exe -s "$eUrl?v=$ts") -split "`r?`n"
-foreach ($line in $rawEndpoints) {
-    $trimmed = $line.Trim()
-    if ($trimmed -and $trimmed.StartsWith("http")) {
-        $endpoints += $trimmed
+try {
+    $textE = $wc.DownloadString("$eUrl?v=$ts")
+    foreach ($line in ($textE -split "`r?`n")) {
+        $trimmed = $line.Trim()
+        if ($trimmed -and $trimmed.StartsWith("http")) {
+            $endpoints += $trimmed
+        }
     }
-}
+} catch {}
 
 if ($endpoints.Count -eq 0) {
-    $endpoints = @("https://chatgpt.com", "https://api.anthropic.com", "https://play.google.com")
+    Write-Error "[-] Critical: Failed to load endpoints.txt from repository."
+    exit 1
 }
 
-# Загрузка резолверов через curl.exe
+# Загрузка резолверов
 $resolvers = @()
-$rawResolvers = (curl.exe -s "$rUrl?v=$ts") -split "`r?`n"
-foreach ($line in $rawResolvers) {
-    $trimmed = $line.Trim()
-    if ($trimmed -and $trimmed.Contains("|")) {
-        $resolvers += $trimmed
+try {
+    $textR = $wc.DownloadString("$rUrl?v=$ts")
+    foreach ($line in ($textR -split "`r?`n")) {
+        $trimmed = $line.Trim()
+        if ($trimmed -and $trimmed.Contains("|")) {
+            $resolvers += $trimmed
+        }
     }
-}
+} catch {}
 
 if ($resolvers.Count -eq 0) {
-    $resolvers = @(
-        "System|SYS|",
-        "Cloudflare|DoH|https://cloudflare-dns.com/dns-query",
-        "Yandex_UDP|UDP|77.88.8.8"
-    )
+    Write-Error "[-] Critical: Failed to load resolvers.txt from repository."
+    exit 1
 }
 
 try { 
