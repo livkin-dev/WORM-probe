@@ -55,28 +55,28 @@ try {
 
 $f = "worm_results_$(Get-Date -UFormat %s).csv"
 $csvHeader = '"REGION";"ISP";"ENDPOINT";"RESOLVER";"IP";"STATUS";"DNS, сек.";"Ожидание ответа, сек.";"Общее время, сек.";"BLOCKED"'
-Out-File -FilePath "$f" -InputObject $csvHeader -Encoding utf8
+[System.IO.File]::WriteAllText("$f", "$csvHeader`n", [System.Text.Encoding]::UTF8)
 
 Write-Host "`n===================================================================================================="
-Write-Host " 📡 WORM PROBE: LLM API CENSORSHIP & DNS TEST"
-Write-Host " 🌍 Region: $myReg | ISP: $myOrg \vert{} IP:$myIp"
+Write-Host " [i] WORM PROBE: LLM API CENSORSHIP AND DNS TEST"
+Write-Host " [i] Region: $myReg | ISP: $myOrg | IP: $myIp"
 Write-Host "===================================================================================================="
-"{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | {5}" -f "API ENDPOINT","RESOLVER","IP","STAT","DNS / RSP / TOT (sec)","BLOCKED?"
+[Console]::WriteLine("{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | {5}", "API ENDPOINT", "RESOLVER", "IP", "STAT", "DNS / RSP / TOT (sec)", "BLOCKED?")
 Write-Host "----------------------------------------------------------------------------------------------------"
 
-foreach ($u in$endpoints) { 
+foreach ($u in $endpoints) { 
     $d = ([uri]$u).Host
-    foreach ($res in$resolvers) { 
-        $p =$res.Split('|')
-        $rn =$p[0]; $rt =$p[1]; $ra =$p[2]
+    foreach ($res in $resolvers) { 
+        $p = $res.Split('|')
+        $rn = $p[0]; $rt = $p[1]; $ra = $p[2]
         
         if ($rt -eq "SYS") { 
             $out = curl.exe -s -o NUL -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 $u 
         } elseif ($rt -eq "DoH") { 
-            $out = curl.exe -s --doh-url$ra -o NUL -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 $u 
+            $out = curl.exe -s --doh-url $ra -o NUL -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 $u 
         } elseif ($rt -eq "UDP") { 
             try { 
-                $dip = (Resolve-DnsName -Name$d -Server $ra -Type A -ErrorAction Stop \vert{} Where-Object {$_.Type -eq 'A'} | Select-Object -First 1).IPAddress
+                $dip = (Resolve-DnsName -Name $d -Server $ra -Type A -ErrorAction Stop | Where-Object {$_.Type -eq 'A'} | Select-Object -First 1).IPAddress
                 if ($dip) { 
                     $out = curl.exe -s --resolve "$($d):443:$dip" -o NUL -w "%{http_code}:%{remote_ip}:%{time_namelookup}:%{time_starttransfer}:%{time_total}" -m 10 $u 
                 } else { 
@@ -93,7 +93,7 @@ foreach ($u in$endpoints) {
         $tr = ($out -split ':')[3] -replace ',', '.'
         $tt = ($out -split ':')[4] -replace ',', '.'
         
-        if ([string]::IsNullOrWhiteSpace($ip)) {$ip = "N/A" }
+        if ([string]::IsNullOrWhiteSpace($ip)) { $ip = "N/A" }
         
         if (![string]::IsNullOrWhiteSpace($tt) -and $tt -ne "0" -and $tt -ne "0.000") { 
             $td_sec = ([double]::Parse($td, [System.Globalization.CultureInfo]::InvariantCulture)).ToString("0.000000", [System.Globalization.CultureInfo]::InvariantCulture)
@@ -104,15 +104,16 @@ foreach ($u in$endpoints) {
             $td_sec = ""; $tr_sec = ""; $tt_sec = ""; $tm_disp = "N/A" 
         }
         
-        if ($st -eq "000" -or [string]::IsNullOrWhiteSpace($st)) {$b = "YES"
-            "{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | ⚠️ YES" -f $d,$rn,$ip,"ERR",$tm_disp 
+        if ($st -eq "000" -or [string]::IsNullOrWhiteSpace($st)) { 
+            $b = "YES"
+            [Console]::WriteLine("{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | [!] YES", $d, $rn, $ip, "ERR", $tm_disp)
         } else { 
             $b = "NO"
-            "{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | ✅ NO" -f $d,$rn,$ip,$st,$tm_disp 
+            [Console]::WriteLine("{0,-28} | {1,-12} | {2,-15} | {3,-4} | {4,-21} | [OK] NO", $d, $rn, $ip, $st, $tm_disp)
         }
         
         $row = "`"$myReg`";`"$myOrg`";`"$d`";`"$rn`";`"$ip`";`"$st`";`"$td_sec`";`"$tr_sec`";`"$tt_sec`";`"$b`""
-        Out-File -FilePath "$f" -InputObject $row -Append -Encoding utf8
+        [System.IO.File]::AppendAllText("$f", "$row`n", [System.Text.Encoding]::UTF8)
     } 
     Write-Host "----------------------------------------------------------------------------------------------------" 
 }
@@ -120,5 +121,5 @@ foreach ($u in$endpoints) {
 $url = "https://docs.google.com/forms/d/e/1FAIpQLScbs8FDq1k3GQAAjJM_N2IHgXBvTjKRPcd_AmdvS5Kz2NJQfQ/formResponse"
 curl.exe -s --data-urlencode "entry.1081274956@$f" $url -o NUL
 $fp = (Get-Item "$f").FullName
-Write-Host "✅ CSV сохранен: $fp"
-Write-Host "✅ Данные успешно отправлены в Google Forms."
+Write-Host "[+] CSV сохранен: $fp"
+Write-Host "[+] Данные успешно отправлены в Google Forms."
