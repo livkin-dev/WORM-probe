@@ -1,0 +1,6 @@
+System|SYS|
+Cloudflare|DoH|https://cloudflare-dns.com/dns-query
+Yandex_DoH|DoH|https://common.doh.dns.yandex.net/dns-query
+Yandex_UDP|UDP|77.88.8.8
+Google_UDP|UDP|8.8.8.8
+NSDI_UDP|UDP|195.208.4.1
