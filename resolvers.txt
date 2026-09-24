@@ -1,6 +1,9 @@
 System|SYS|
 Cloudflare|DoH|https://cloudflare-dns.com/dns-query
-Yandex_DoH|DoH|https://common.doh.dns.yandex.net/dns-query
+AdGuard_DoH|DoH|https://unfiltered.adguard-dns.com/dns-query
+AdGuard_UDP|UDP|94.140.14.140
 Yandex_UDP|UDP|77.88.8.8
 Google_UDP|UDP|8.8.8.8
-NSDI_UDP|UDP|195.208.4.1
+Beeline_UDP|UDP|85.21.192.3
+NSDI_1_UDP|UDP|195.208.4.1
+NSDI_2_UDP|UDP|195.208.5.1
