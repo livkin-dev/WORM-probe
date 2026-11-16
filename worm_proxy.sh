@@ -40,15 +40,15 @@ CSV_FILE="worm_results_$(date +%s).csv"
 # Определение GEO через прокси (используем ip-api.com, т.к. у ipinfo жестче лимиты на shared IP)
 GEO=$(curl -s -m 8 "${CURL_PROXY_ARG[@]}" "http://ip-api.com/json?fields=status,countryCode,city,as,query,mobile,hosting" 2>/dev/null)
 
-IFS='|' read -r MY_IP MY_ORG MY_CITY MY_COUNTRY NODE_TYPE <<< $(echo "$GEO" | python3 -c '
+GEO_LINES=$(echo "$GEO" | python3 -c '
 import sys, json
 try:
     d = json.load(sys.stdin)
     if d.get("status") != "success":
         raise ValueError()
     ip = d.get("query", "Unknown")
-    org = d.get("as", "Unknown ISP").replace(";", "").replace(",", "")
-    city = d.get("city", "Unknown").replace(";", "")
+    org = d.get("as", "Unknown ISP").replace(";", "").replace(",", "").replace("\"", "")
+    city = d.get("city", "Unknown").replace(";", "").replace("\"", "")
     country = d.get("countryCode", "Region")
     if d.get("mobile"):
         ntype = "Mobile"
@@ -56,10 +56,20 @@ try:
         ntype = "Hosting"
     else:
         ntype = "Residential"
-    print(f"{ip}|{org}|{city}|{country}|{ntype}")
+    print(ip)
+    print(org)
+    print(city)
+    print(country)
+    print(ntype)
 except Exception:
-    print("Unknown|Unknown ISP|Unknown|Region|Unknown")
+    print("Unknown\nUnknown ISP\nUnknown\nRegion\nUnknown")
 ')
+
+MY_IP=$(echo "$GEO_LINES" | sed -n '1p')
+MY_ORG=$(echo "$GEO_LINES" | sed -n '2p')
+MY_CITY=$(echo "$GEO_LINES" | sed -n '3p')
+MY_COUNTRY=$(echo "$GEO_LINES" | sed -n '4p')
+NODE_TYPE=$(echo "$GEO_LINES" | sed -n '5p')
 
 MY_REG="${MY_CITY} ${MY_COUNTRY} [${NODE_TYPE}]"
 
