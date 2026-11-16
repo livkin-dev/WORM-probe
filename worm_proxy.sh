@@ -38,13 +38,30 @@ fi
 CSV_FILE="worm_results_$(date +%s).csv"
 
 # Определение GEO через прокси (используем ip-api.com, т.к. у ipinfo жестче лимиты на shared IP)
-GEO=$(curl -s -m 8 "${CURL_PROXY_ARG[@]}" "http://ip-api.com/json" 2>/dev/null)
-MY_IP=$(echo "$GEO" | grep -m1 '"query"' | cut -d'"' -f4)
-MY_ORG=$(echo "$GEO" | grep -m1 '"as"' | cut -d'"' -f4 | sed 's/[",;]//g')
-MY_CITY=$(echo "$GEO" | grep -m1 '"city"' | cut -d'"' -f4)
-MY_COUNTRY=$(echo "$GEO" | grep -m1 '"countryCode"' | cut -d'"' -f4)
-[ -z "$MY_IP" ] && MY_IP="Unknown" && MY_ORG="Unknown ISP" && MY_CITY="Unknown" && MY_COUNTRY="Region"
-MY_REG="${MY_CITY} ${MY_COUNTRY}"
+GEO=$(curl -s -m 8 "${CURL_PROXY_ARG[@]}" "http://ip-api.com/json?fields=status,countryCode,city,as,query,mobile,hosting" 2>/dev/null)
+
+IFS='|' read -r MY_IP MY_ORG MY_CITY MY_COUNTRY NODE_TYPE <<< $(echo "$GEO" | python3 -c '
+import sys, json
+try:
+    d = json.load(sys.stdin)
+    if d.get("status") != "success":
+        raise ValueError()
+    ip = d.get("query", "Unknown")
+    org = d.get("as", "Unknown ISP").replace(";", "").replace(",", "")
+    city = d.get("city", "Unknown").replace(";", "")
+    country = d.get("countryCode", "Region")
+    if d.get("mobile"):
+        ntype = "Mobile"
+    elif d.get("hosting"):
+        ntype = "Hosting"
+    else:
+        ntype = "Residential"
+    print(f"{ip}|{org}|{city}|{country}|{ntype}")
+except Exception:
+    print("Unknown|Unknown ISP|Unknown|Region|Unknown")
+')
+
+MY_REG="${MY_CITY} ${MY_COUNTRY} [${NODE_TYPE}]"
 
 echo '"REGION";"ISP";"ENDPOINT";"RESOLVER";"IP";"STATUS";"DNS, сек.";"Ожидание ответа, сек.";"Общее время, сек.";"BLOCKED"' > "$CSV_FILE"
 
